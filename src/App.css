@@ -1,0 +1,305 @@
+/* ============================================================
+   App.css — ESTILOS GLOBALES DE LA SPA "Tienda de Proyectos"
+   Paleta: azul petróleo profundo + acento ámbar (identidad
+   propia del panel), tipografía del sistema para carga rápida.
+   ============================================================ */
+
+/* Variables de la paleta */
+:root {
+  --fondo: #0e1a24;          /* azul petróleo casi negro (fondo general) */
+  --panel: #162632;          /* paneles y tarjetas */
+  --panel-borde: #24394a;    /* bordes sutiles */
+  --texto: #e8eef2;          /* texto principal */
+  --texto-suave: #8fa6b5;    /* texto secundario */
+  --acento: #f0a638;         /* ámbar: botones y detalles */
+  --acento-oscuro: #c9821a;
+  --exito: #2f9e6e;
+  --error: #d64550;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--fondo);
+  color: var(--texto);
+  min-height: 100vh;
+}
+
+.contenido {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 32px 20px;
+}
+
+/* ------------------- NAVBAR ------------------- */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;               /* responsivo: se apila en móvil */
+  padding: 14px 28px;
+  background: var(--panel);
+  border-bottom: 2px solid var(--acento);
+}
+
+.navbar-marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.navbar-logo,
+.login-logo {
+  color: var(--acento);
+  font-size: 1.2rem;
+}
+
+.navbar-enlaces {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.navbar-enlaces a {
+  color: var(--texto-suave);
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: background 0.15s, color 0.15s;
+}
+
+.navbar-enlaces a:hover {
+  color: var(--texto);
+  background: var(--panel-borde);
+}
+
+/* NavLink agrega la clase .active en la ruta actual */
+.navbar-enlaces a.active {
+  color: #131313;
+  background: var(--acento);
+  font-weight: 600;
+}
+
+.navbar-sesion {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navbar-usuario {
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+}
+
+/* Píldora de rol: color distinto para ADMIN y USER */
+.rol-pildora {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+.rol-admin { background: var(--acento); color: #131313; }
+.rol-user  { background: var(--panel-borde); color: var(--texto); }
+
+.btn-logout {
+  background: transparent;
+  color: var(--error);
+  border: 1px solid var(--error);
+  padding: 7px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  transition: background 0.15s, color 0.15s;
+}
+.btn-logout:hover {
+  background: var(--error);
+  color: #fff;
+}
+
+/* ------------------- LOGIN ------------------- */
+.login-panel {
+  min-height: 80vh;
+  display: grid;
+  place-items: center;          /* centra la tarjeta en la pantalla */
+}
+
+.login-tarjeta {
+  width: 100%;
+  max-width: 380px;
+  background: var(--panel);
+  border: 1px solid var(--panel-borde);
+  border-top: 4px solid var(--acento);
+  border-radius: 14px;
+  padding: 36px 30px;
+  text-align: center;
+}
+
+.login-tarjeta h1 { font-size: 1.5rem; margin-top: 8px; }
+.login-sub { color: var(--texto-suave); font-size: 0.88rem; margin: 6px 0 24px; }
+.login-tarjeta form { text-align: left; }
+
+/* ------------------- FORMULARIOS ------------------- */
+label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+  margin: 14px 0 6px;
+}
+
+input, select {
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--panel-borde);
+  background: var(--fondo);
+  color: var(--texto);
+  font-size: 0.95rem;
+}
+
+/* Resalte visual al enfocar un campo (accesibilidad) */
+input:focus, select:focus {
+  outline: 2px solid var(--acento);
+  border-color: transparent;
+}
+
+button[type='submit'] {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: var(--acento);
+  color: #131313;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+button[type='submit']:hover { background: var(--acento-oscuro); }
+button[type='submit']:disabled { opacity: 0.6; cursor: wait; }
+
+/* Dos columnas para pares de campos; una columna en móvil */
+.fila-doble {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+@media (max-width: 560px) {
+  .fila-doble { grid-template-columns: 1fr; }
+}
+
+/* Checkboxes de empleados como "chips" clickeables */
+.lista-empleados {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+.chip-empleado {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 8px 12px;
+  border: 1px solid var(--panel-borde);
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  color: var(--texto);
+}
+.chip-empleado input { width: auto; }
+.chip-empleado:has(input:checked) {
+  border-color: var(--acento);
+  background: rgba(240, 166, 56, 0.12);
+}
+
+/* ------------------- PANELES ------------------- */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-borde);
+  border-radius: 14px;
+  padding: 28px;
+}
+.panel-angosto { max-width: 560px; margin: 0 auto; }
+.panel-sub { color: var(--texto-suave); font-size: 0.88rem; margin-top: 4px; }
+
+.panel-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+/* Métrica del endpoint público */
+.metrica {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border: 1px dashed var(--acento);
+  border-radius: 10px;
+}
+.metrica-numero { font-size: 2rem; font-weight: 800; color: var(--acento); }
+.metrica-texto { font-size: 0.75rem; color: var(--texto-suave); line-height: 1.3; }
+
+/* ------------------- TABLA RESPONSIVA ------------------- */
+/* El contenedor con scroll horizontal evita que la tabla
+   rompa el diseño en pantallas angostas */
+.tabla-contenedor { overflow-x: auto; }
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.93rem;
+}
+
+.tabla th {
+  text-align: left;
+  padding: 12px 14px;
+  color: var(--acento);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px solid var(--acento);
+}
+
+.tabla td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--panel-borde);
+  color: var(--texto);
+}
+
+.tabla tbody tr:hover { background: rgba(240, 166, 56, 0.06); }
+.celda-nombre { font-weight: 600; }
+
+/* ------------------- ALERTAS Y MENSAJES ------------------- */
+.alerta {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+.alerta-error {
+  background: rgba(214, 69, 80, 0.14);
+  border: 1px solid var(--error);
+  color: #ff9aa1;
+}
+.alerta-exito {
+  background: rgba(47, 158, 110, 0.14);
+  border: 1px solid var(--exito);
+  color: #7fe0b4;
+}
+
+.mensaje { color: var(--texto-suave); padding: 10px 0; }
